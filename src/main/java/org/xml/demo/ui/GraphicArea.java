@@ -74,7 +74,7 @@ public class GraphicArea extends JComponent {
             drawFromState(g, true);
         }
     }
-
+        
     private Figure drawFromState(Graphics g, boolean doDecorate) {
         ApplicationWindowState state = manager.provideState();
         IDecorator decorator = createDecorator(state);
@@ -116,16 +116,11 @@ public class GraphicArea extends JComponent {
     }
 
     private void drawGrid(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
-
         for (int i =0 ; i<getHeight(); i+= gridStep) {
             g.drawLine(0, i, getWidth(), i);
         }
-
         for (int i =0 ; i<getWidth(); i+= gridStep) {
             g.drawLine(i, 0, i, getHeight());
         }
-
-
     }
 }

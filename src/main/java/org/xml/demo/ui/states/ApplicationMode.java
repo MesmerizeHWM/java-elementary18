@@ -1,5 +1,10 @@
 package org.xml.demo.ui.states;
 
+/**
+ * Modes of application.
+ * 
+ * @author alitvinov
+ */
 public enum ApplicationMode {
     DRAW_RECTANGLE,
     DRAW_LINE,
