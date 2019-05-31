@@ -6,7 +6,7 @@ import lombok.*;
 public class LombokDemo {
 
     private int var1;
-
+    //some comment
     @EqualsAndHashCode.Exclude
     private final String var2;
 
