@@ -8,9 +8,19 @@ import java.awt.*;
 
 @Setter
 @Getter
-public abstract class  Figure {
-
+public abstract class  Figure {   
+    
     protected ApplicationWindowState windowState;
-
+    
+    protected boolean isPicked;
+    
     public abstract void draw(Graphics g, boolean filled);
+        
+    public abstract boolean belongs(int x, int y);
+    
+    public void shift(int x1, int y1, int x2, int y2) {        
+    }
+    
+    public void setToPos() {
+    }
 }

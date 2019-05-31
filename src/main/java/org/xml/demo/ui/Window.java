@@ -41,14 +41,14 @@ public class Window extends JFrame implements IApplicationWindowStateManager {
     }
 
     private void initWithButtons() {
-        //create Panel - container hwich will contain buttons
+        //create Panel - container which will contain buttons
         JPanel buttonPanel = new JPanel();
 
         //create ButtonGroup - only one button in button group will be pressed
         ButtonGroup buttonGroup = new ButtonGroup();
 
         //Button which will switch application mode to DRAW_RECTANGLE
-        JToggleButton button = new JToggleButton("Rectangle");        
+        JToggleButton button = new JToggleButton("Rectangle");
         button.addActionListener(e -> {
             //get previous state
             ApplicationWindowState previous = provideState();
@@ -76,29 +76,50 @@ public class Window extends JFrame implements IApplicationWindowStateManager {
             changeState(new ApplicationWindowState(ApplicationMode.DRAW_LINE, previous.getColor()));
         });
         buttonPanel.add(button3);
-        
+
         //color chooser button
         JButton colorButton = new JButton("Color");
         colorButton.addActionListener((e) -> {
-                    ApplicationWindowState previous = provideState();
-                    Color c = JColorChooser.showDialog(
-                            (Component) e.getSource(),
-                             "Choose Background Color",
-                            provideState().getColor());
-                    //get previous state
-                    ApplicationWindowState currentState = provideState();
-                    //change current state
-                    changeState(new ApplicationWindowState(previous.getMode(), c));
+            ApplicationWindowState previous = provideState();
+            Color c = JColorChooser.showDialog(
+                    (Component) e.getSource(),
+                    "Choose Background Color",
+                    provideState().getColor());            
+            //change current state
+            changeState(new ApplicationWindowState(previous.getMode(), c));
         });
         buttonPanel.add(colorButton);
 
+        //color chooser button
+        JToggleButton pickButton = new JToggleButton("Pick");
+        pickButton.addActionListener((e) -> {
+            //get previous state
+            ApplicationWindowState previous = provideState();
+            //change current state
+            changeState(new ApplicationWindowState(ApplicationMode.SELECT_ELEMENT, previous.getColor()));
+        });
+        buttonPanel.add(pickButton);
+        
+        
+        //color chooser button
+        JToggleButton fill = new JToggleButton("FillColor");
+        fill.addActionListener((e) -> {
+            //get previous state
+            ApplicationWindowState previous = provideState();
+            //change current state
+            changeState(new ApplicationWindowState(ApplicationMode.FILL_ELEMENT, previous.getColor()));
+        });
+        buttonPanel.add(fill);
+        
         add(buttonPanel, BorderLayout.PAGE_START);
         buttonGroup.add(button);
         buttonGroup.add(button2);
         buttonGroup.add(button3);
+        buttonGroup.add(pickButton);
+        buttonGroup.add(fill);        
     }
 
-    
+
     /**
      * Method for exposing of state.
      * @return ApplicationWindowState
@@ -107,7 +128,7 @@ public class Window extends JFrame implements IApplicationWindowStateManager {
     public ApplicationWindowState provideState() {
         return applicationState == null ? INITIAL_STATE : applicationState;
     }
-    
+
     /**
      * Changing of current state
      * @param state new state whish should be inserted
